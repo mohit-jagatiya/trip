@@ -1,0 +1,1626 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Momai Trip Planner (MTP)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f14" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body
+    class="bg-neutral-950 text-neutral-100 antialiased min-h-screen font-[Inter] selection:bg-sky-500/30 selection:text-white"
+    style="scroll-behavior: smooth"
+  >
+    <!-- App Shell -->
+    <header
+      class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/70 bg-neutral-900/70 border-b border-white/10"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#/" class="flex items-center gap-3 group">
+            <div
+              class="h-9 w-9 rounded-md bg-sky-500/10 text-sky-400 grid place-items-center ring-1 ring-sky-500/30 group-hover:ring-sky-400/40 transition-all"
+            >
+              <span class="text-[11px] font-semibold tracking-tight">MTP</span>
+            </div>
+            <div>
+              <div class="text-sm md:text-base font-semibold tracking-tight">
+                Momai Trip Planner
+              </div>
+              <div class="text-xs text-neutral-400 hidden sm:block">
+                Plan Your Perfect Getaway with MTP
+              </div>
+            </div>
+          </a>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              href="#/"
+              class="text-sm text-neutral-300 hover:text-white hover:underline underline-offset-4"
+              >Home</a
+            >
+            <a
+              href="#/section/featured"
+              class="text-sm text-neutral-300 hover:text-white hover:underline underline-offset-4"
+              >Featured Trips</a
+            >
+            <a
+              href="#/section/destinations"
+              class="text-sm text-neutral-300 hover:text-white hover:underline underline-offset-4"
+              >Destinations</a
+            >
+            <a
+              href="#/section/inquiry"
+              class="text-sm text-neutral-300 hover:text-white hover:underline underline-offset-4"
+              >Inquiry</a
+            >
+            <a
+              href="#/admin/login"
+              class="inline-flex items-center gap-2 text-sm text-sky-300 hover:text-sky-200"
+            >
+              <i data-lucide="lock" class="w-4 h-4"></i> Admin
+            </a>
+          </nav>
+          <div class="md:hidden">
+            <button
+              id="mobileMenuBtn"
+              class="inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm bg-white/5 hover:bg-white/10 ring-1 ring-white/10"
+            >
+              <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+          <div class="grid gap-2">
+            <a
+              href="#/"
+              class="px-3 py-2 text-sm rounded-md bg-white/5 hover:bg-white/10"
+              >Home</a
+            >
+            <a
+              href="#/section/featured"
+              class="px-3 py-2 text-sm rounded-md bg-white/5 hover:bg-white/10"
+              >Featured Trips</a
+            >
+            <a
+              href="#/section/destinations"
+              class="px-3 py-2 text-sm rounded-md bg-white/5 hover:bg-white/10"
+              >Destinations</a
+            >
+            <a
+              href="#/section/inquiry"
+              class="px-3 py-2 text-sm rounded-md bg-white/5 hover:bg-white/10"
+              >Inquiry</a
+            >
+            <a
+              href="#/admin/login"
+              class="px-3 py-2 text-sm rounded-md bg-sky-500/10 text-sky-200 ring-1 ring-sky-500/30 hover:ring-sky-400/40"
+              >Admin</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="app" class="min-h-[70vh]"></main>
+
+    <footer class="mt-20 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="h-9 w-9 rounded-md bg-sky-500/10 text-sky-400 grid place-items-center ring-1 ring-sky-500/30"
+              >
+                <span class="text-[11px] font-semibold tracking-tight"
+                  >MTP</span
+                >
+              </div>
+              <div class="text-lg font-semibold tracking-tight">
+                Momai Trip Planner
+              </div>
+            </div>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              “Plan Your Perfect Getaway with MTP”. Your trusted partner for
+              curated travel experiences.
+            </p>
+          </div>
+          <div>
+            <div class="text-sm font-semibold tracking-tight mb-3">Contact</div>
+            <ul class="text-neutral-300 text-sm space-y-2">
+              <li class="flex items-center gap-2">
+                <i data-lucide="phone" class="w-4 h-4 text-neutral-400"></i>
+                <span>8320428218 / 9979963260</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="mail" class="w-4 h-4 text-neutral-400"></i>
+                <span>admin@mtp.com</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i
+                  data-lucide="map-pin"
+                  class="w-4 h-4 text-neutral-400 mt-0.5"
+                ></i>
+                <span
+                  >SF-213, ΚΑΜAXI KUNJ, NR-DMART, OLD CHANI ROAD, VADODARA</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-sm font-semibold tracking-tight mb-3">
+              Quick Links
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+              <a href="#/" class="text-neutral-300 hover:text-white">Home</a>
+              <a
+                href="#/section/featured"
+                class="text-neutral-300 hover:text-white"
+                >Featured Trips</a
+              >
+              <a
+                href="#/section/destinations"
+                class="text-neutral-300 hover:text-white"
+                >Destinations</a
+              >
+              <a
+                href="#/section/inquiry"
+                class="text-neutral-300 hover:text-white"
+                >Inquiry</a
+              >
+              <a href="#/admin/login" class="text-sky-300 hover:text-sky-200"
+                >Admin</a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 pt-6 border-t border-white/10 text-xs text-neutral-500 flex flex-wrap items-center justify-between"
+        >
+          <div>© <span id="year"></span> MTP — All rights reserved.</div>
+          <div class="flex items-center gap-4">
+            <span class="inline-flex items-center gap-1"
+              ><i data-lucide="shield" class="w-3.5 h-3.5"></i> Secure</span
+            >
+            <span class="inline-flex items-center gap-1"
+              ><i data-lucide="globe" class="w-3.5 h-3.5"></i> Global</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Global Modals Root -->
+    <div id="modal-root"></div>
+
+    <script>
+      // -------------------------------
+      // Mock Data + Local Storage State
+      // -------------------------------
+      const DEFAULT_TRIPS = [
+        {
+          id: 1,
+          title: "Leh-Ladakh Adventure",
+          description:
+            "A thrilling 7-day bike expedition through the Himalayan ranges.",
+          duration: "7 Days / 6 Nights",
+          price: 25000,
+          image: "/images/leh-ladakh.jpg",
+          category: "Adventure",
+          destination: "Ladakh, India",
+        },
+        {
+          id: 2,
+          title: "Bali Honeymoon Escape",
+          description: "Romantic getaway with beaches, temples, and sunsets.",
+          duration: "5 Days / 4 Nights",
+          price: 32000,
+          image: "/images/bali-honeymoon.jpg",
+          category: "Romantic",
+          destination: "Bali, Indonesia",
+        },
+        {
+          id: 3,
+          title: "Swiss Alps Explorer",
+          description:
+            "Experience scenic train rides and snowy peaks of Switzerland.",
+          duration: "6 Days / 5 Nights",
+          price: 50000,
+          image: "/images/swiss-alps.jpg",
+          category: "Luxury",
+          destination: "Zurich, Switzerland",
+        },
+      ];
+      const DEFAULT_DESTINATIONS = [
+        {
+          id: 1,
+          name: "Manali",
+          description:
+            "Nestled in the Himalayas, Manali is a paradise for nature lovers and adventurers.",
+          best_time: "October to February",
+          image: "/images/manali.jpg",
+          top_attractions: ["Solang Valley", "Rohtang Pass", "Old Manali"],
+        },
+        {
+          id: 2,
+          name: "Goa",
+          description:
+            "Famous for its beaches, nightlife, and seafood — perfect for relaxation and fun.",
+          best_time: "November to February",
+          image: "/images/goa.jpg",
+          top_attractions: ["Baga Beach", "Fort Aguada", "Anjuna Market"],
+        },
+        {
+          id: 3,
+          name: "Bali",
+          description:
+            "An Indonesian island known for forested volcanic mountains and coral reefs.",
+          best_time: "April to October",
+          image: "/images/bali.jpg",
+          top_attractions: ["Ubud", "Tanah Lot", "Seminyak"],
+        },
+      ];
+      const DEFAULT_INQUIRIES = [
+        {
+          id: 1,
+          name: "Ravi Sharma",
+          email: "ravi@example.com",
+          destination: "Bali",
+          message: "Looking for a couple trip in November.",
+          status: "Pending",
+        },
+        {
+          id: 2,
+          name: "Priya Mehta",
+          email: "priya@example.com",
+          destination: "Leh-Ladakh",
+          message: "Need details for group booking.",
+          status: "Replied",
+        },
+      ];
+
+      const LS_KEYS = {
+        trips: "mtp_trips",
+        destinations: "mtp_destinations",
+        inquiries: "mtp_inquiries",
+        admin: "mtp_admin_logged_in",
+      };
+
+      function lsGet(key, fallback) {
+        try {
+          const val = localStorage.getItem(key);
+          return val ? JSON.parse(val) : fallback;
+        } catch {
+          return fallback;
+        }
+      }
+      function lsSet(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+      function initStore() {
+        if (!localStorage.getItem(LS_KEYS.trips))
+          lsSet(LS_KEYS.trips, DEFAULT_TRIPS);
+        if (!localStorage.getItem(LS_KEYS.destinations))
+          lsSet(LS_KEYS.destinations, DEFAULT_DESTINATIONS);
+        if (!localStorage.getItem(LS_KEYS.inquiries))
+          lsSet(LS_KEYS.inquiries, DEFAULT_INQUIRIES);
+      }
+
+      // -------------------------------
+      // Utilities
+      // -------------------------------
+      function currencyINR(n) {
+        try {
+          return new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0,
+          }).format(n);
+        } catch {
+          return "₹" + n;
+        }
+      }
+      function getImageUrl(fallbackQuery) {
+        // Use Unsplash if relative path likely doesn't exist
+        // fallbackQuery: string
+        return `https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1400&auto=format&fit=crop`;
+      }
+      function pickImage(record) {
+        if (record?.image && record.image.startsWith("http"))
+          return record.image;
+        // Heuristic unsplash per destination/category
+        const q = encodeURIComponent(
+          record?.destination || record?.name || record?.category || "travel"
+        );
+        return `https://source.unsplash.com/1600x900/?${q}`;
+      }
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      // -------------------------------
+      // Router
+      // -------------------------------
+      function parseRoute() {
+        const hash = location.hash || "#/";
+        const parts = hash.replace(/^#\//, "").split("/");
+        // Routes:
+        // / -> landing
+        // /section/:anchor
+        // /trip/:id
+        // /destination/:id
+        // /admin/login
+        // /admin/dashboard
+        if (parts[0] === "" || parts[0] === undefined) return { name: "home" };
+        if (parts[0] === "section")
+          return { name: "section", anchor: parts[1] || "" };
+        if (parts[0] === "trip") return { name: "trip", id: parts[1] };
+        if (parts[0] === "destination")
+          return { name: "destination", id: parts[1] };
+        if (parts[0] === "admin" && parts[1] === "login")
+          return { name: "admin-login" };
+        if (parts[0] === "admin" && parts[1] === "dashboard")
+          return { name: "admin-dashboard" };
+        return { name: "not-found" };
+      }
+
+      function navigate(to) {
+        location.hash = to;
+      }
+
+      // -------------------------------
+      // Components
+      // -------------------------------
+      function LandingPage() {
+        const trips = lsGet(LS_KEYS.trips, []);
+        const destinations = lsGet(LS_KEYS.destinations, []);
+        return `
+          <section class="relative overflow-hidden">
+            <div class="absolute inset-0 -z-10 opacity-40">
+              <div class="pointer-events-none absolute -top-24 -left-24 h-80 w-80 bg-sky-500/20 rounded-full blur-3xl"></div>
+              <div class="pointer-events-none absolute top-24 right-0 h-80 w-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+              <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div>
+                  <h1 class="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">Plan Your Perfect Getaway with Momai Trip Planner</h1>
+                  <p class="mt-4 text-neutral-300 text-base md:text-lg">Discover curated adventures, romantic escapes, and luxurious experiences—crafted to your style and budget.</p>
+                  <div class="mt-8 flex flex-wrap gap-3">
+                    <a href="#/section/inquiry" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400 transition">
+                      <i data-lucide="plane" class="w-4 h-4"></i> Plan Your Trip
+                    </a>
+                    <a href="#/section/featured" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10 transition">
+                      <i data-lucide="map" class="w-4 h-4"></i> Explore Featured Trips
+                    </a>
+                  </div>
+                  <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                    <div class="rounded-lg bg-white/5 ring-1 ring-white/10 p-4">
+                      <div class="text-2xl font-semibold tracking-tight">50+</div>
+                      <div class="text-xs text-neutral-400">Curated Itineraries</div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 ring-1 ring-white/10 p-4">
+                      <div class="text-2xl font-semibold tracking-tight">24/7</div>
+                      <div class="text-xs text-neutral-400">Support</div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 ring-1 ring-white/10 p-4">
+                      <div class="text-2xl font-semibold tracking-tight">4.8/5</div>
+                      <div class="text-xs text-neutral-400">Traveler Rating</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative">
+                  <div class="aspect-[4/3] rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hero Travel" />
+                  </div>
+                  <div class="absolute -bottom-6 -left-6 hidden md:block">
+                    <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4 backdrop-blur">
+                      <div class="flex items-center gap-3">
+                        <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
+                        <div class="text-sm">Trusted by 2k+ happy travelers</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="featured" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="flex items-end justify-between gap-4 mb-6">
+              <div>
+                <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Featured Trips</h2>
+                <p class="text-neutral-400 text-sm md:text-base">Handpicked journeys for every kind of traveler.</p>
+              </div>
+              <a href="#/section/inquiry" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Get Custom Plan
+              </a>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${trips.map((t) => TripCard(t)).join("")}
+            </div>
+          </section>
+
+          <section id="destinations" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="flex items-end justify-between gap-4 mb-6">
+              <div>
+                <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Popular Destinations</h2>
+                <p class="text-neutral-400 text-sm md:text-base">From beaches to mountains—pick your vibe.</p>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${destinations.map((d) => DestinationCard(d)).join("")}
+            </div>
+          </section>
+
+          <section id="inquiry" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Plan Your Trip Now</h2>
+                <p class="text-neutral-400 mt-2">Tell us what you’re looking for and we’ll get back with a personalized plan.</p>
+                <div class="mt-6 rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                  <div class="flex items-center gap-3 text-sm text-neutral-300">
+                    <i data-lucide="phone" class="w-4 h-4 text-neutral-400"></i> 8320428218 / 9979963260
+                  </div>
+                  <div class="flex items-center gap-3 text-sm text-neutral-300 mt-2">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-neutral-400"></i> SF-213, ΚΑΜAXI KUNJ, NR-DMART, OLD CHANI ROAD, VADODARA
+                  </div>
+                </div>
+              </div>
+              <div>
+                ${InquiryForm()}
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function TripCard(t) {
+        const img = pickImage(t);
+        return `
+          <a href="#/trip/${
+            t.id
+          }" class="group rounded-xl overflow-hidden bg-white/5 ring-1 ring-white/10 hover:ring-white/20 transition block">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&q=80" alt="${
+                t.title
+              }" class="h-full w-full object-cover group-hover:scale-[1.03] transition" />
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-lg font-semibold tracking-tight">${t.title}</h3>
+                <span class="text-xs px-2 py-1 rounded bg-sky-500/10 text-sky-300 ring-1 ring-sky-500/30">${
+                  t.category
+                }</span>
+              </div>
+              <p class="text-sm text-neutral-400 mt-1 line-clamp-2">${
+                t.description
+              }</p>
+              <div class="mt-3 flex items-center justify-between text-sm">
+                <div class="inline-flex items-center gap-2 text-neutral-300">
+                  <i data-lucide="clock" class="w-4 h-4"></i> ${t.duration}
+                </div>
+                <div class="inline-flex items-center gap-2 text-emerald-300">
+                  <i data-lucide="coins" class="w-4 h-4"></i> ${currencyINR(
+                    t.price
+                  )}
+                </div>
+              </div>
+            </div>
+          </a>
+        `;
+      }
+
+      function DestinationCard(d) {
+        const img = pickImage(d);
+        return `
+          <a href="#/destination/${d.id}" class="group rounded-xl overflow-hidden bg-white/5 ring-1 ring-white/10 hover:ring-white/20 transition block">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&q=80" alt="${d.name}" class="h-full w-full object-cover group-hover:scale-[1.03] transition" />
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-lg font-semibold tracking-tight">${d.name}</h3>
+                <span class="text-xs px-2 py-1 rounded bg-purple-500/10 text-purple-300 ring-1 ring-purple-500/30">Popular</span>
+              </div>
+              <p class="text-sm text-neutral-400 mt-1 line-clamp-2">${d.description}</p>
+              <div class="mt-3 text-xs text-neutral-300 inline-flex items-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4"></i> Best time: ${d.best_time}
+              </div>
+            </div>
+          </a>
+        `;
+      }
+
+      function InquiryForm(presetDestination = "") {
+        const destinations = lsGet(LS_KEYS.destinations, []);
+        return `
+          <form id="inquiryForm" class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4 space-y-3" data-preset="${presetDestination}">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Name</label>
+                <input required type="text" name="name" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="Your name" />
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-400 mb-1">Email</label>
+                <input required type="email" name="email" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs text-neutral-400 mb-1">Destination</label>
+              <input list="destinationList" name="destination" value="${presetDestination}" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="e.g., Bali" />
+              <datalist id="destinationList">
+                ${destinations
+                  .map((d) => `<option value="${d.name}">`)
+                  .join("")}
+              </datalist>
+            </div>
+            <div>
+              <label class="block text-xs text-neutral-400 mb-1">Message</label>
+              <textarea required rows="4" name="message" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="Tell us about your plans..."></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="text-xs text-neutral-500">We’ll respond within 24 hours.</div>
+              <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400">
+                <i data-lucide="send" class="w-4 h-4"></i> Submit Inquiry
+              </button>
+            </div>
+          </form>
+        `;
+      }
+
+      function TripDetailPage(id) {
+        const trips = lsGet(LS_KEYS.trips, []);
+        const trip = trips.find((t) => String(t.id) === String(id));
+        if (!trip) return NotFound("Trip not found");
+
+        const related = trips
+          .filter(
+            (t) =>
+              t.id !== trip.id &&
+              (t.destination === trip.destination ||
+                t.category === trip.category)
+          )
+          .slice(0, 3);
+        const img = pickImage(trip);
+
+        return `
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+            <a href="#/" class="inline-flex items-center gap-2 text-sm text-neutral-300 hover:text-white">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+            </a>
+            <div class="grid lg:grid-cols-3 gap-8 mt-6">
+              <div class="lg:col-span-2">
+                <div class="aspect-[16/9] rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5">
+                  <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&q=80" class="w-full h-full object-cover" alt="${
+                    trip.title
+                  }" />
+                </div>
+                <div class="mt-6">
+                  <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">${
+                    trip.title
+                  }</h1>
+                  <div class="mt-3 flex flex-wrap items-center gap-4 text-sm">
+                    <span class="inline-flex items-center gap-2 px-2 py-1 rounded bg-sky-500/10 text-sky-300 ring-1 ring-sky-500/30">
+                      <i data-lucide="tag" class="w-4 h-4"></i> ${trip.category}
+                    </span>
+                    <span class="inline-flex items-center gap-2 text-neutral-300">
+                      <i data-lucide="clock" class="w-4 h-4"></i> ${
+                        trip.duration
+                      }
+                    </span>
+                    <span class="inline-flex items-center gap-2 text-emerald-300">
+                      <i data-lucide="coins" class="w-4 h-4"></i> ${currencyINR(
+                        trip.price
+                      )}
+                    </span>
+                    <span class="inline-flex items-center gap-2 text-neutral-300">
+                      <i data-lucide="map-pin" class="w-4 h-4"></i> ${
+                        trip.destination
+                      }
+                    </span>
+                  </div>
+                  <p class="mt-4 text-neutral-300 leading-relaxed">${
+                    trip.description
+                  }</p>
+                </div>
+                <div class="mt-10">
+                  <h3 class="text-xl font-semibold tracking-tight mb-3">Related Trips</h3>
+                  <div class="grid sm:grid-cols-2 gap-5">
+                    ${
+                      related.length
+                        ? related.map((t) => TripCard(t)).join("")
+                        : `<div class="text-sm text-neutral-400">No related trips found.</div>`
+                    }
+                  </div>
+                </div>
+              </div>
+              <aside class="lg:col-span-1">
+                <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                  <div class="text-lg font-semibold tracking-tight">Ready to inquire?</div>
+                  <p class="text-sm text-neutral-400 mt-1">Get a custom quote and itinerary for ${
+                    trip.title
+                  }.</p>
+                  <button id="openInquiry" class="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400">
+                    <i data-lucide="messages-square" class="w-4 h-4"></i> Inquire Now
+                  </button>
+                </div>
+                <div class="mt-6 rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                  <div class="text-sm font-semibold tracking-tight mb-2">Highlights</div>
+                  <ul class="text-sm text-neutral-300 space-y-2">
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Expert-crafted itinerary</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Local guides</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Flexible dates</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        `;
+      }
+
+      function DestinationDetailPage(id) {
+        const destinations = lsGet(LS_KEYS.destinations, []);
+        const trips = lsGet(LS_KEYS.trips, []);
+        const dest = destinations.find((d) => String(d.id) === String(id));
+        if (!dest) return NotFound("Destination not found");
+        const img = pickImage(dest);
+        const topTrips = trips
+          .filter((t) =>
+            (t.destination || "")
+              .toLowerCase()
+              .includes(dest.name.toLowerCase())
+          )
+          .slice(0, 3);
+
+        return `
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+            <a href="#/" class="inline-flex items-center gap-2 text-sm text-neutral-300 hover:text-white">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+            </a>
+            <div class="mt-6 rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5">
+              <div class="aspect-[16/6] md:aspect-[16/5]">
+                <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&q=80" class="w-full h-full object-cover" alt="${
+                  dest.name
+                }" />
+              </div>
+              <div class="p-4 md:p-6">
+                <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">${
+                  dest.name
+                }</h1>
+                <p class="mt-3 text-neutral-300 leading-relaxed">${
+                  dest.description
+                }</p>
+                <div class="mt-4 flex flex-wrap items-center gap-4 text-sm">
+                  <span class="inline-flex items-center gap-2 text-neutral-300">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Best time to visit: ${
+                      dest.best_time
+                    }
+                  </span>
+                </div>
+                <div class="mt-6">
+                  <div class="text-lg font-semibold tracking-tight mb-2">Main Attractions</div>
+                  <div class="flex flex-wrap gap-2">
+                    ${dest.top_attractions
+                      .map(
+                        (a) =>
+                          `<span class="px-3 py-1 text-sm rounded-full bg-white/5 ring-1 ring-white/10">${a}</span>`
+                      )
+                      .join("")}
+                  </div>
+                </div>
+                <div class="mt-8">
+                  <div class="text-lg font-semibold tracking-tight mb-3">Top Trips</div>
+                  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${
+                      topTrips.length
+                        ? topTrips.map((t) => TripCard(t)).join("")
+                        : `<div class="text-sm text-neutral-400">No trips linked yet.</div>`
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function NotFound(message = "Page not found") {
+        return `
+          <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 ring-1 ring-white/10">
+              <i data-lucide="search-x" class="w-7 h-7 text-neutral-400"></i>
+            </div>
+            <h2 class="mt-4 text-2xl md:text-3xl font-semibold tracking-tight">${message}</h2>
+            <p class="mt-2 text-neutral-400">The page you’re looking for doesn’t exist or has been moved.</p>
+            <a href="#/" class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">
+              <i data-lucide="home" class="w-4 h-4"></i> Go Home
+            </a>
+          </section>
+        `;
+      }
+
+      // -------------------------------
+      // Admin Panel
+      // -------------------------------
+      function AdminLoginPage() {
+        return `
+          <section class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="h-9 w-9 rounded-md bg-sky-500/10 text-sky-400 grid place-items-center ring-1 ring-sky-500/30">
+                  <span class="text-[11px] font-semibold tracking-tight">MTP</span>
+                </div>
+                <div class="text-lg font-semibold tracking-tight">Admin Login</div>
+              </div>
+              <form id="adminLoginForm" class="space-y-3">
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">Email</label>
+                  <input required type="email" name="email" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="admin@mtp.com" />
+                </div>
+                <div>
+                  <label class="block text-xs text-neutral-400 mb-1">Password</label>
+                  <input required type="password" name="password" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="password123" />
+                </div>
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400">
+                  <i data-lucide="log-in" class="w-4 h-4"></i> Sign In
+                </button>
+                <p class="text-xs text-neutral-500 text-center">Use credentials: admin@mtp.com / password123</p>
+              </form>
+            </div>
+          </section>
+        `;
+      }
+
+      function AdminDashboardPage() {
+        const trips = lsGet(LS_KEYS.trips, []);
+        const destinations = lsGet(LS_KEYS.destinations, []);
+        const inquiries = lsGet(LS_KEYS.inquiries, []);
+        return `
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center justify-between">
+              <div>
+                <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Dashboard</h1>
+                <p class="text-neutral-400 text-sm">Overview and management</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="logoutBtn" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">
+                  <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+                </button>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-4 mt-6">
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                <div class="text-sm text-neutral-400">Total Trips</div>
+                <div class="text-2xl font-semibold tracking-tight mt-1">${
+                  trips.length
+                }</div>
+              </div>
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                <div class="text-sm text-neutral-400">Total Destinations</div>
+                <div class="text-2xl font-semibold tracking-tight mt-1">${
+                  destinations.length
+                }</div>
+              </div>
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                <div class="text-sm text-neutral-400">Total Inquiries</div>
+                <div class="text-2xl font-semibold tracking-tight mt-1">${
+                  inquiries.length
+                }</div>
+              </div>
+            </div>
+
+            <div class="mt-8 grid lg:grid-cols-3 gap-6">
+              <div class="lg:col-span-2 rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                <h2 class="text-lg font-semibold tracking-tight">Activity</h2>
+                <p class="text-sm text-neutral-400">Recent distribution</p>
+                <div class="mt-3">
+                  <div class="relative w-full h-64 rounded-lg bg-neutral-900/60 ring-1 ring-white/10 p-2">
+                    <div class="h-full w-full"><canvas id="statsChart"></canvas></div>
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10 p-4">
+                <h2 class="text-lg font-semibold tracking-tight">Quick Actions</h2>
+                <div class="mt-3 grid gap-2">
+                  <button data-open-modal="trip" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-sky-500/10 text-sky-200 ring-1 ring-sky-500/30 hover:ring-sky-400/40">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Add Trip
+                  </button>
+                  <button data-open-modal="destination" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-purple-500/10 text-purple-200 ring-1 ring-purple-500/30 hover:ring-purple-400/40">
+                    <i data-lucide="plus" class="w-4 h-4"></i> Add Destination
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 grid gap-8">
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10">
+                <div class="flex items-center justify-between p-4 border-b border-white/10">
+                  <h3 class="text-lg font-semibold tracking-tight">Trips</h3>
+                  <button data-open-modal="trip" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400">
+                    <i data-lucide="plus" class="w-4 h-4"></i> New Trip
+                  </button>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="text-left text-neutral-400">
+                      <tr class="border-b border-white/10">
+                        <th class="px-4 py-3">Title</th>
+                        <th class="px-4 py-3">Category</th>
+                        <th class="px-4 py-3">Duration</th>
+                        <th class="px-4 py-3">Price</th>
+                        <th class="px-4 py-3">Destination</th>
+                        <th class="px-4 py-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tripRows">
+                      ${trips
+                        .map(
+                          (t) => `
+                        <tr class="border-b border-white/5 hover:bg-white/5">
+                          <td class="px-4 py-3">${t.title}</td>
+                          <td class="px-4 py-3">${t.category}</td>
+                          <td class="px-4 py-3">${t.duration}</td>
+                          <td class="px-4 py-3">${currencyINR(t.price)}</td>
+                          <td class="px-4 py-3">${t.destination}</td>
+                          <td class="px-4 py-3">
+                            <div class="flex items-center gap-2 justify-end">
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-edit-trip="${
+                                t.id
+                              }">
+                                <i data-lucide="pencil" class="w-4 h-4"></i> Edit
+                              </button>
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500/10 text-red-300 ring-1 ring-red-500/30 hover:ring-red-400/40" data-delete-trip="${
+                                t.id
+                              }">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i> Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      `
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10">
+                <div class="flex items-center justify-between p-4 border-b border-white/10">
+                  <h3 class="text-lg font-semibold tracking-tight">Destinations</h3>
+                  <button data-open-modal="destination" class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-purple-500 text-neutral-950 font-medium ring-1 ring-purple-400 hover:ring-purple-300 hover:bg-purple-400">
+                    <i data-lucide="plus" class="w-4 h-4"></i> New Destination
+                  </button>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="text-left text-neutral-400">
+                      <tr class="border-b border-white/10">
+                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Best Time</th>
+                        <th class="px-4 py-3">Attractions</th>
+                        <th class="px-4 py-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="destinationRows">
+                      ${lsGet(LS_KEYS.destinations, [])
+                        .map(
+                          (d) => `
+                        <tr class="border-b border-white/5 hover:bg-white/5">
+                          <td class="px-4 py-3">${d.name}</td>
+                          <td class="px-4 py-3">${d.best_time}</td>
+                          <td class="px-4 py-3">${d.top_attractions.join(
+                            ", "
+                          )}</td>
+                          <td class="px-4 py-3">
+                            <div class="flex items-center gap-2 justify-end">
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-edit-destination="${
+                                d.id
+                              }">
+                                <i data-lucide="pencil" class="w-4 h-4"></i> Edit
+                              </button>
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500/10 text-red-300 ring-1 ring-red-500/30 hover:ring-red-400/40" data-delete-destination="${
+                                d.id
+                              }">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i> Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      `
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="rounded-xl bg-white/5 ring-1 ring-white/10">
+                <div class="flex items-center justify-between p-4 border-b border-white/10">
+                  <h3 class="text-lg font-semibold tracking-tight">Inquiries</h3>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="text-left text-neutral-400">
+                      <tr class="border-b border-white/10">
+                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Destination</th>
+                        <th class="px-4 py-3">Message</th>
+                        <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="inquiryRows">
+                      ${lsGet(LS_KEYS.inquiries, [])
+                        .map(
+                          (q) => `
+                        <tr class="border-b border-white/5 hover:bg-white/5">
+                          <td class="px-4 py-3">${q.name}</td>
+                          <td class="px-4 py-3">${q.email}</td>
+                          <td class="px-4 py-3">${q.destination}</td>
+                          <td class="px-4 py-3 max-w-sm"><div class="line-clamp-2">${
+                            q.message
+                          }</div></td>
+                          <td class="px-4 py-3">
+                            <select data-status-inquiry="${
+                              q.id
+                            }" class="px-2 py-1 rounded bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none">
+                              <option ${
+                                q.status === "Pending" ? "selected" : ""
+                              }>Pending</option>
+                              <option ${
+                                q.status === "Replied" ? "selected" : ""
+                              }>Replied</option>
+                            </select>
+                          </td>
+                          <td class="px-4 py-3">
+                            <div class="flex items-center gap-2 justify-end">
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-view-inquiry="${
+                                q.id
+                              }">
+                                <i data-lucide="eye" class="w-4 h-4"></i> View
+                              </button>
+                              <button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500/10 text-red-300 ring-1 ring-red-500/30 hover:ring-red-400/40" data-delete-inquiry="${
+                                q.id
+                              }">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i> Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      `
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // -------------------------------
+      // Modals
+      // -------------------------------
+      function openModal(type, payload = null) {
+        const root = byId("modal-root");
+        const isEdit = !!payload;
+        const trips = lsGet(LS_KEYS.trips, []);
+        const destinations = lsGet(LS_KEYS.destinations, []);
+        let content = "";
+
+        if (type === "trip") {
+          const t = payload || {
+            title: "",
+            description: "",
+            duration: "",
+            price: "",
+            image: "",
+            category: "",
+            destination: "",
+          };
+          content = `
+            <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <div class="absolute inset-0 bg-black/60" data-close-modal></div>
+              <div class="relative w-full max-w-2xl rounded-xl bg-neutral-950 ring-1 ring-white/10 p-4">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-semibold tracking-tight">${
+                    isEdit ? "Edit Trip" : "Add Trip"
+                  }</h3>
+                  <button class="p-2 rounded-md bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-close-modal><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <form id="tripForm" class="grid sm:grid-cols-2 gap-3 mt-4" data-edit-id="${
+                  isEdit ? t.id : ""
+                }">
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs text-neutral-400 mb-1">Title</label>
+                    <input required name="title" value="${
+                      t.title
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs text-neutral-400 mb-1">Description</label>
+                    <textarea required rows="3" name="description" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none">${
+                      t.description
+                    }</textarea>
+                  </div>
+                  <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Duration</label>
+                    <input required name="duration" value="${
+                      t.duration
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="e.g., 5 Days / 4 Nights" />
+                  </div>
+                  <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Price (INR)</label>
+                    <input required type="number" name="price" value="${
+                      t.price
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" />
+                  </div>
+                  <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Category</label>
+                    <input required name="category" value="${
+                      t.category
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="Adventure, Romantic, Luxury" />
+                  </div>
+                  <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Destination</label>
+                    <input required name="destination" value="${
+                      t.destination
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="City, Country" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs text-neutral-400 mb-1">Image URL (optional)</label>
+                    <input name="image" value="${
+                      t.image || ""
+                    }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none" placeholder="https://..." />
+                  </div>
+                  <div class="sm:col-span-2 flex items-center justify-end gap-2">
+                    <button type="button" data-close-modal class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">Cancel</button>
+                    <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-sky-500 text-neutral-950 font-medium ring-1 ring-sky-400 hover:ring-sky-300 hover:bg-sky-400">${
+                      isEdit ? "Save Changes" : "Create Trip"
+                    }</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          `;
+        }
+
+        if (type === "destination") {
+          const d = payload || {
+            name: "",
+            description: "",
+            best_time: "",
+            image: "",
+            top_attractions: [],
+          };
+          content = `
+            <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <div class="absolute inset-0 bg-black/60" data-close-modal></div>
+              <div class="relative w-full max-w-2xl rounded-xl bg-neutral-950 ring-1 ring-white/10 p-4">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-semibold tracking-tight">${
+                    payload ? "Edit Destination" : "Add Destination"
+                  }</h3>
+                  <button class="p-2 rounded-md bg-white/5 ring-1 ring-white/10 hover:bg-white/10" datahtml -close-modal><i data-lucide="x" class="w-4 h-4"></i></button> </div> <form id="destinationForm" class="grid sm:grid-cols-2 gap-3 mt-4" data-edit-id="${
+                    payload ? d.id : ""
+                  }"> <div class="sm:col-span-2"> <label class="block text-xs text-neutral-400 mb-1">Name</label> <input required name="name" value="${
+            d.name
+          }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-purple-500/40 outline-none" /> </div> <div class="sm:col-span-2"> <label class="block text-xs text-neutral-400 mb-1">Description</label> <textarea required rows="3" name="description" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-purple-500/40 outline-none">${
+            d.description
+          }</textarea> </div> <div> <label class="block text-xs text-neutral-400 mb-1">Best Time</label> <input required name="best_time" value="${
+            d.best_time
+          }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-purple-500/40 outline-none" placeholder="e.g., November to February" /> </div> <div> <label class="block text-xs text-neutral-400 mb-1">Attractions (comma separated)</label> <input name="top_attractions" value="${(
+            d.top_attractions || []
+          ).join(
+            ", "
+          )}" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-purple-500/40 outline-none" placeholder="Beach, Fort, Market" /> </div> <div class="sm:col-span-2"> <label class="block text-xs text-neutral-400 mb-1">Image URL (optional)</label> <input name="image" value="${
+            d.image || ""
+          }" class="w-full px-3 py-2 rounded-md bg-neutral-900/80 ring-1 ring-white/10 focus:ring-purple-500/40 outline-none" placeholder="https://..." /> </div> <div class="sm:col-span-2 flex items-center justify-end gap-2"> <button type="button" data-close-modal class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">Cancel</button> <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-purple-500 text-neutral-950 font-medium ring-1 ring-purple-400 hover:ring-purple-300 hover:bg-purple-400">${
+            payload ? "Save Changes" : "Create Destination"
+          }</button> </div> </form> </div> </div> `;
+        }
+
+        if (type === "inquiry") {
+          const preset =
+            (payload && (payload.preset || payload.destination || "")) || "";
+          content = `
+        <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div class="absolute inset-0 bg-black/60" data-close-modal></div>
+          <div class="relative w-full max-w-xl rounded-xl bg-neutral-950 ring-1 ring-white/10 p-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold tracking-tight">Plan Your Trip</h3>
+              <button class="p-2 rounded-md bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-close-modal><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="mt-3">
+              ${InquiryForm(preset)}
+            </div>
+          </div>
+        </div>
+      `;
+        }
+
+        if (type === "inquiry-view" && payload) {
+          const q = payload;
+          content = `
+        <div class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div class="absolute inset-0 bg-black/60" data-close-modal></div>
+          <div class="relative w-full max-w-lg rounded-xl bg-neutral-950 ring-1 ring-white/10 p-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold tracking-tight">Inquiry Details</h3>
+              <button class="p-2 rounded-md bg-white/5 ring-1 ring-white/10 hover:bg-white/10" data-close-modal><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="mt-4 grid gap-3 text-sm">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div class="text-neutral-400">Name</div>
+                  <div class="font-medium">${q.name}</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-neutral-400">Email</div>
+                  <div class="font-medium">${q.email}</div>
+                </div>
+              </div>
+              <div>
+                <div class="text-neutral-400">Destination</div>
+                <div class="font-medium">${q.destination}</div>
+              </div>
+              <div>
+                <div class="text-neutral-400">Message</div>
+                <div class="font-medium leading-relaxed">${q.message}</div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="text-neutral-400">Status</div>
+                <select id="inqStatusSelect" class="px-2 py-1 rounded bg-neutral-900/80 ring-1 ring-white/10 focus:ring-sky-500/40 outline-none">
+                  <option ${
+                    q.status === "Pending" ? "selected" : ""
+                  }>Pending</option>
+                  <option ${
+                    q.status === "Replied" ? "selected" : ""
+                  }>Replied</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-2">
+                <button class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-red-500/10 text-red-300 ring-1 ring-red-500/30 hover:ring-red-400/40" id="deleteInquiryBtn">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i> Delete
+                </button>
+                <button data-close-modal class="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+        }
+
+        root.innerHTML = content;
+        if (window.lucide) lucide.createIcons();
+
+        function closeModal() {
+          root.innerHTML = "";
+        }
+
+        root.querySelectorAll("[data-close-modal]").forEach((el) => {
+          el.addEventListener("click", closeModal);
+        });
+
+        // Bind form handlers inside modal
+        if (type === "trip") {
+          const form = root.querySelector("#tripForm");
+          form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const data = Object.fromEntries(fd.entries());
+            data.price = Number(data.price || 0);
+            const editId = form.getAttribute("data-edit-id");
+            let list = lsGet(LS_KEYS.trips, []);
+            if (editId) {
+              list = list.map((t) =>
+                String(t.id) === String(editId) ? { ...t, ...data } : t
+              );
+            } else {
+              const newId = Date.now();
+              list.push({ id: newId, ...data });
+            }
+            lsSet(LS_KEYS.trips, list);
+            closeModal();
+            render(); // refresh UI
+            toast("Trip saved");
+          });
+        }
+
+        if (type === "destination") {
+          const form = root.querySelector("#destinationForm");
+          form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const raw = Object.fromEntries(fd.entries());
+            const attractions = String(raw.top_attractions || "")
+              .split(",")
+              .map((s) => s.trim())
+              .filter(Boolean);
+            const data = {
+              name: raw.name,
+              description: raw.description,
+              best_time: raw.best_time,
+              image: raw.image,
+              top_attractions: attractions,
+            };
+            const editId = form.getAttribute("data-edit-id");
+            let list = lsGet(LS_KEYS.destinations, []);
+            if (editId) {
+              list = list.map((d) =>
+                String(d.id) === String(editId) ? { ...d, ...data } : d
+              );
+            } else {
+              list.push({ id: Date.now(), ...data });
+            }
+            lsSet(LS_KEYS.destinations, list);
+            closeModal();
+            render();
+            toast("Destination saved");
+          });
+        }
+
+        if (type === "inquiry") {
+          const form = root.querySelector("#inquiryForm");
+          bindInquiryForm(form, () => {
+            closeModal();
+            toast("Inquiry submitted");
+          });
+        }
+
+        if (type === "inquiry-view" && payload) {
+          const q = payload;
+          const statusSel = root.querySelector("#inqStatusSelect");
+          statusSel?.addEventListener("change", () => {
+            let list = lsGet(LS_KEYS.inquiries, []);
+            list = list.map((x) =>
+              x.id === q.id ? { ...x, status: statusSel.value } : x
+            );
+            lsSet(LS_KEYS.inquiries, list);
+            toast("Inquiry status updated");
+            render();
+          });
+          root
+            .querySelector("#deleteInquiryBtn")
+            ?.addEventListener("click", () => {
+              if (!confirm("Delete this inquiry?")) return;
+              let list = lsGet(LS_KEYS.inquiries, []);
+              list = list.filter((x) => x.id !== q.id);
+              lsSet(LS_KEYS.inquiries, list);
+              toast("Inquiry deleted");
+              render();
+              closeModal();
+            });
+        }
+      }
+
+      // -------------------------------
+      // Mounting and Event Handlers
+      // -------------------------------
+      function bindInquiryForm(form, onDone) {
+        if (!form) return;
+        form.addEventListener(
+          "submit",
+          (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const data = Object.fromEntries(fd.entries());
+            const inquiries = lsGet(LS_KEYS.inquiries, []);
+            inquiries.push({ id: Date.now(), ...data, status: "Pending" });
+            lsSet(LS_KEYS.inquiries, inquiries);
+
+            // Replace form with success state if inline
+            const wrap = form.parentElement;
+            if (wrap) {
+              wrap.innerHTML = `
+          <div class="rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/30 p-4">
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 mt-0.5"></i>
+              <div>
+                <div class="font-medium">Inquiry submitted!</div>
+                <div class="text-sm text-neutral-300">Our team will reach out within 24 hours.</div>
+              </div>
+            </div>
+          </div>
+        `;
+              if (window.lucide) lucide.createIcons();
+            }
+            if (onDone) onDone();
+            render(); // update admin counts if dashboard open
+          },
+          { once: true }
+        );
+      }
+
+      function toast(message = "Saved", type = "success") {
+        const el = document.createElement("div");
+        el.className =
+          "fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] px-4 py-2 rounded-md text-sm ring-1 backdrop-blur transition opacity-0 translate-y-2 " +
+          (type === "success"
+            ? "bg-emerald-500/10 text-emerald-200 ring-emerald-500/30"
+            : "bg-red-500/10 text-red-200 ring-red-500/30");
+        el.innerHTML = `<div class="inline-flex items-center gap-2"><i data-lucide="${
+          type === "success" ? "check" : "x"
+        }" class="w-4 h-4"></i><span>${message}</span></div>`;
+        document.body.appendChild(el);
+        if (window.lucide) lucide.createIcons();
+        requestAnimationFrame(() => {
+          el.classList.remove("opacity-0", "translate-y-2");
+          el.classList.add("opacity-100", "translate-y-0");
+        });
+        setTimeout(() => {
+          el.classList.remove("opacity-100", "translate-y-0");
+          el.classList.add("opacity-0", "translate-y-2");
+          setTimeout(() => el.remove(), 250);
+        }, 1600);
+      }
+
+      function renderChart() {
+        const ctx = byId("statsChart");
+        if (!ctx) return;
+        const dataTrips = lsGet(LS_KEYS.trips, []).length;
+        const dataDest = lsGet(LS_KEYS.destinations, []).length;
+        const dataInq = lsGet(LS_KEYS.inquiries, []).length;
+        if (window._statsChart) {
+          window._statsChart.destroy();
+        }
+        window._statsChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Trips", "Destinations", "Inquiries"],
+            datasets: [
+              {
+                label: "Count",
+                data: [dataTrips, dataDest, dataInq],
+                backgroundColor: ["#38bdf8", "#a78bfa", "#34d399"],
+                borderRadius: 6,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: {
+                grid: { color: "rgba(255,255,255,0.06)" },
+                ticks: { color: "#a3a3a3" },
+              },
+              y: {
+                grid: { color: "rgba(255,255,255,0.06)" },
+                ticks: { color: "#a3a3a3" },
+                beginAtZero: true,
+                precision: 0,
+              },
+            },
+          },
+        });
+      }
+
+      function isAdmin() {
+        return !!lsGet(LS_KEYS.admin, false);
+      }
+
+      function guardAdmin(route) {
+        if (route.name === "admin-dashboard" && !isAdmin()) {
+          navigate("#/admin/login");
+          return false;
+        }
+        if (route.name === "admin-login" && isAdmin()) {
+          navigate("#/admin/dashboard");
+          return false;
+        }
+        return true;
+      }
+
+      function render() {
+        const route = parseRoute();
+        if (!guardAdmin(route)) return;
+
+        const app = byId("app");
+        let html = "";
+        if (route.name === "home") {
+          html = LandingPage();
+        } else if (route.name === "section") {
+          html = LandingPage();
+        } else if (route.name === "trip") {
+          html = TripDetailPage(route.id);
+        } else if (route.name === "destination") {
+          html = DestinationDetailPage(route.id);
+        } else if (route.name === "admin-login") {
+          html = AdminLoginPage();
+        } else if (route.name === "admin-dashboard") {
+          html = AdminDashboardPage();
+        } else {
+          html = NotFound();
+        }
+
+        app.innerHTML = html;
+
+        // Icons
+        if (window.lucide) lucide.createIcons();
+
+        // Route-specific bindings
+        if (route.name === "home") {
+          bindInquiryForm(byId("inquiryForm"));
+        }
+        if (route.name === "section") {
+          bindInquiryForm(byId("inquiryForm"));
+          const anchor = route.anchor || "";
+          if (anchor) {
+            setTimeout(() => {
+              const el = document.getElementById(anchor);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 50);
+          }
+        }
+        if (route.name === "trip") {
+          // Bind inquiry modal opener with preset destination
+          const trips = lsGet(LS_KEYS.trips, []);
+          const trip = trips.find((t) => String(t.id) === String(route.id));
+          byId("openInquiry")?.addEventListener("click", () =>
+            openModal("inquiry", { preset: trip?.destination || "" })
+          );
+        }
+        if (route.name === "admin-login") {
+          const form = byId("adminLoginForm");
+          form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const email = fd.get("email");
+            const password = fd.get("password");
+            if (email === "admin@mtp.com" && password === "password123") {
+              lsSet(LS_KEYS.admin, true);
+              toast("Welcome, Admin");
+              navigate("#/admin/dashboard");
+              render();
+            } else {
+              toast("Invalid credentials", "error");
+            }
+          });
+        }
+        if (route.name === "admin-dashboard") {
+          renderChart();
+
+          // Logout
+          byId("logoutBtn")?.addEventListener("click", () => {
+            localStorage.removeItem(LS_KEYS.admin);
+            toast("Logged out");
+            navigate("#/admin/login");
+            render();
+          });
+
+          // Quick actions
+          document.querySelectorAll("[data-open-modal]").forEach((btn) => {
+            btn.addEventListener("click", () =>
+              openModal(btn.getAttribute("data-open-modal"))
+            );
+          });
+
+          // Edit/Delete actions for trips
+          document.querySelectorAll("[data-edit-trip]")?.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-edit-trip");
+              const trips = lsGet(LS_KEYS.trips, []);
+              const t = trips.find((x) => String(x.id) === String(id));
+              if (t) openModal("trip", t);
+            });
+          });
+          document.querySelectorAll("[data-delete-trip]")?.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = btn.getAttribute("data-delete-trip");
+              if (!confirm("Delete this trip?")) return;
+              let trips = lsGet(LS_KEYS.trips, []);
+              trips = trips.filter((t) => String(t.id) !== String(id));
+              lsSet(LS_KEYS.trips, trips);
+              toast("Trip deleted");
+              render();
+            });
+          });
+
+          // Edit/Delete actions for destinations
+          document
+            .querySelectorAll("[data-edit-destination]")
+            ?.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-edit-destination");
+                const list = lsGet(LS_KEYS.destinations, []);
+                const d = list.find((x) => String(x.id) === String(id));
+                if (d) openModal("destination", d);
+              });
+            });
+          document
+            .querySelectorAll("[data-delete-destination]")
+            ?.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-delete-destination");
+                if (!confirm("Delete this destination?")) return;
+                let list = lsGet(LS_KEYS.destinations, []);
+                list = list.filter((d) => String(d.id) !== String(id));
+                lsSet(LS_KEYS.destinations, list);
+                toast("Destination deleted");
+                render();
+              });
+            });
+
+          // Inquiry status + view/delete
+          document.querySelectorAll("[data-status-inquiry]")?.forEach((sel) => {
+            sel.addEventListener("change", () => {
+              const id = Number(sel.getAttribute("data-status-inquiry"));
+              let list = lsGet(LS_KEYS.inquiries, []);
+              list = list.map((q) =>
+                q.id === id ? { ...q, status: sel.value } : q
+              );
+              lsSet(LS_KEYS.inquiries, list);
+              toast("Status updated");
+            });
+          });
+          document.querySelectorAll("[data-view-inquiry]")?.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = Number(btn.getAttribute("data-view-inquiry"));
+              const list = lsGet(LS_KEYS.inquiries, []);
+              const q = list.find((x) => x.id === id);
+              if (q) openModal("inquiry-view", q);
+            });
+          });
+          document.querySelectorAll("[data-delete-inquiry]")?.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const id = Number(btn.getAttribute("data-delete-inquiry"));
+              if (!confirm("Delete this inquiry?")) return;
+              let list = lsGet(LS_KEYS.inquiries, []);
+              list = list.filter((q) => q.id !== id);
+              lsSet(LS_KEYS.inquiries, list);
+              toast("Inquiry deleted");
+              render();
+            });
+          });
+        }
+      }
+
+      // -------------------------------
+      // Global Init
+      // -------------------------------
+      function setupHeader() {
+        const btn = byId("mobileMenuBtn");
+        const menu = byId("mobileMenu");
+        btn?.addEventListener("click", () => {
+          menu?.classList.toggle("hidden");
+        });
+        // Close on nav click (mobile)
+        menu?.querySelectorAll("a")?.forEach((a) =>
+          a.addEventListener("click", () => {
+            menu.classList.add("hidden");
+          })
+        );
+      }
+
+      function setupGlobal() {
+        initStore();
+        const y = byId("year");
+        if (y) y.textContent = new Date().getFullYear();
+        setupHeader();
+        window.addEventListener("hashchange", () => {
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        render();
+      }
+
+      setupGlobal();
+    </script>
+    <script>
+      // Prefetch icons
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    </script>
+  </body>
+</html>
